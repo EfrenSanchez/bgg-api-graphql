@@ -9,6 +9,7 @@ const LinkTypeNames = {
 };
 
 const getFirstNumberValue = (list) => list?.map((item) => Number(item["$"]?.value))?.[0] || 0;
+const getFirstStringValue = (list) => list?.map((item) => item["$"]?.value)?.[0] || "";
 const extractStringValuesFromArray = (list) => list?.map((obj) => obj["$"]);
 
 const parseThingData = (data) => {
@@ -72,7 +73,33 @@ const parseSearchData = (data) => {
     };
 };
 
+const parseUserData = (data) => {
+    const { user } = data;
+
+    return {
+        id: user["$"].id,
+        name: user["$"].name,
+        firstname: getFirstStringValue(user.firstname),
+        lastname: getFirstStringValue(user.lastname),
+        avatarlink: getFirstStringValue(user.avatarlink),
+        yearregistered: getFirstStringValue(user.yearregistered),
+        lastlogin: getFirstStringValue(user.lastlogin),
+        stateorprovince: getFirstStringValue(user.stateorprovince),
+        country: getFirstStringValue(user.country),
+        webaddress: getFirstStringValue(user.webaddress),
+        top: {
+            domain: user.top[0]["$"].domain,
+            items: extractStringValuesFromArray(user?.top?.[0]?.item),
+        },
+        hot: {
+            domain: user.top[0]["$"].domain,
+            items: extractStringValuesFromArray(user?.hot?.[0]?.item),
+        },
+    };
+};
+
 module.exports = {
     parseThingData,
     parseSearchData,
+    parseUserData,
 };

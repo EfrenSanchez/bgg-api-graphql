@@ -1,6 +1,9 @@
 const { gql } = require("apollo-server-express");
+const enumThingType = require("./thingType");
 
 const typeDefs = gql`
+    ${enumThingType}
+
     type Thing {
         id: Int!
         type: ThingType!
@@ -21,23 +24,10 @@ const typeDefs = gql`
         artists: [Link]
     }
 
-    type Search {
-        id: Int!
-        type: ThingType!
-        name: [Name]
-        yearpublished: Int
-    }
-
     type Name {
         type: String!
         sortindex: Int
         value: String!
-    }
-
-    type Link {
-        id: String
-        type: String
-        value: String
     }
 
     type Numplayers {
@@ -65,14 +55,10 @@ const typeDefs = gql`
         value: Int
     }
 
-    enum ThingType {
-        boardgame
-        boardgameexpansion
-    }
-
-    type Query {
-        thing(id: Int, type: ThingType, stats: Boolean): [Thing]
-        search(query: String, type: ThingType): [Search]
+    type Link {
+        id: String
+        type: String
+        value: String
     }
 `;
 
