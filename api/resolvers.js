@@ -2,6 +2,8 @@ const { fetchThings, searchThings } = require("../services/bgg");
 const { parseSearchData, parseThingData } = require("../utils/parsersXmlData");
 
 const fetchAndParseThing = async (args) => {
+    if (!args.stats) delete args.stats;
+
     try {
         const things = await fetchThings(args);
         if (!things) return [];

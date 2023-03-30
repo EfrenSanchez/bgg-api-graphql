@@ -27,7 +27,7 @@ const fetchThings = async (args) => {
 const searchThings = async (args) => {
     const endpoint = "https://api.geekdo.com/xmlapi2/search";
     const queryParams = new URLSearchParams(args);
-    console.log(`${endpoint}?${queryParams.toString()}`);
+
     try {
         const { data } = await axios.get(`${endpoint}?${queryParams.toString()}`);
         return await parseXML(data);
