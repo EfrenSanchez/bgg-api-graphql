@@ -45,7 +45,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        thing(id: String, type: ThingType): Thing
+        thing(id: String, type: ThingType): [Thing]
         search(query: String, type: ThingType): [Search]
     }
 `;

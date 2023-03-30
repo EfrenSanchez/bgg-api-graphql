@@ -4,9 +4,9 @@ const { parseSearchData, parseThingData } = require("../utils/parsersXmlData");
 const fetchAndParseThing = async (args) => {
     try {
         const things = await fetchThings(args);
-        if (!things) return {};
+        if (!things) return [];
 
-        return parseThingData(things[0]);
+        return things.map(parseThingData);
     } catch (error) {
         console.error(error);
         throw new Error("Something went wrong while fetching thing data.");
